@@ -1,13 +1,14 @@
-import "./style.css";
+// import "../src/input.css";
 
 let todoItems = [
-  { text: "Estudar Jornada front-end", checked: true, id: 1 },
+  { text: "Teste", checked: true, id: 1 },
   { text: "Finalizar caixa de ferramentas Staart", checked: false, id: 2 },
 ];
 
 function findTodoById(id) {
-  return todoItems.find((todo) => todo.id === id);
+  return todoItems.find((todo) => todo.id === id); //O método find()retorna o valor do primeiro elemento do array que satisfaz a função de teste provida. Caso contrário, undefinedé retornado.
 }
+console.log(findTodoById(2))
 
 function addTodo(text) {
   const todo = { text, checked: false, id: Date.now() };
@@ -53,12 +54,13 @@ function filterTodos(filter) {
 */ 
 
 function renderTodoList(items = todoItems) {
-  const todoList = document.querySelector(".todos");
-  todoList.innerHTML = "";
+  const todoList = document.querySelector(".todos"); // seleciona UL
+  todoList.innerHTML = ""; //Limpa UL
   items.forEach((todo) => {
-    todoList.appendChild(renderTodoItem(todo));
+    todoList.appendChild(renderTodoItem(todo)); // percorre o array e coloca um elemento filho na UL, passando os todos do array
   });
 }
+
 
 function renderTodoItem(todo) {
   const isChecked = todo.checked;

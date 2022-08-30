@@ -1,12 +1,11 @@
 {
   "name": "todo-list",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "tailwind.config.js",
   "scripts": {
     "start": "webpack serve --config ./webpack.config.js --mode development",
-    "build": "webpack --config ./webpack.config.js --mode production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./src/input.css -o ./dist/output.css --watch"
   },
   "author": "vitormalencar",
   "license": "ISC",
@@ -25,12 +24,22 @@
     "style-loader": "^3.3.1",
     "svg-inline-loader": "^0.8.2",
     "svg-url-loader": "^7.1.1",
-    "tailwindcss": "^3.1.4",
+    "tailwindcss": "^3.1.8",
     "webpack": "^5.73.0",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.9.2"
   },
   "dependencies": {
     "save-dev": "^0.0.1-security"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manogui777/todo-web-master.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/manogui777/todo-web-master/issues"
+  },
+  "homepage": "https://github.com/manogui777/todo-web-master#readme",
+  "description": ""
 }
