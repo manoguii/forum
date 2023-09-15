@@ -4,7 +4,7 @@
 > Serialized Error: { errno: -13, code: 'EACCES', syscall: 'scandir', path: '/home/manogui/www/node-js/nest-clean/database/pg' }
 
 ```bash
-sudo chmod -R 777 database
+sudo chmod -R 777 data/pg
 ```
 
 # Setup
