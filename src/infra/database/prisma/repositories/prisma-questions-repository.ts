@@ -62,7 +62,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
 
     await this.prisma.question.update({
       where: {
-        id: question.id.toString(),
+        id: data.id,
       },
       data,
     })
