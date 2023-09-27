@@ -5,7 +5,7 @@ import { QuestionAttachment } from '@/domain/forum/enterprise/entities/question-
 export class PrismaQuestionAttachmentMapper {
   static toDomain(raw: PrismaAttachment): QuestionAttachment {
     if (!raw.questionId) {
-      throw new Error('Invalid comment type.')
+      throw new Error('Invalid attachment type.')
     }
 
     return QuestionAttachment.create(
@@ -20,9 +20,9 @@ export class PrismaQuestionAttachmentMapper {
   static toPrismaUpdateMany(
     attachments: QuestionAttachment[],
   ): Prisma.AttachmentUpdateManyArgs {
-    const attachmentIds = attachments.map((attachment) =>
-      attachment.attachmentId.toString(),
-    )
+    const attachmentIds = attachments.map((attachment) => {
+      return attachment.attachmentId.toString()
+    })
 
     return {
       where: {
