@@ -1,13 +1,4 @@
-# Errors
-
-### EACCES: permission denied
-> Serialized Error: { errno: -13, code: 'EACCES', syscall: 'scandir', path: '/home/manogui/www/node-js/nest-clean/database/pg' }
-
-```bash
-sudo chmod -R 777 data/pg
-```
-
-# Setup
+# Setup JWT private and public key
 
 > Generate private and public key using rsa256 and add in .env file converting to base64 format.
 
