@@ -13,7 +13,7 @@ COPY package.json pnpm-lock.yaml ./
 # Prod deps
 FROM base AS prod-deps
 
-RUN pnpm install --prod --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 # Build
 FROM base AS build
