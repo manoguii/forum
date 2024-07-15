@@ -3,23 +3,24 @@ version: '3.8'
 services:
   postgres:
     container_name: forum-pg
-    image: postgres
+    image: postgres:16.3-alpine3.20
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: forum
-      PGDATA: /data/postgres
-    # volumes:
-    #   - ./data/pg:/data/postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
   cache:
     container_name: forum-cache
-    image: redis
+    image: redis:7.2.5
     ports:
       - 6379:6379
-    # volumes:
-    #   - ./data/redis:/data
+    environment:
+      ALLOW_EMPTY_PASSWORD: yes
+    volumes:
+      - cache_data:/data
   api:
     build:
       context: .
@@ -29,3 +30,6 @@ services:
     depends_on:
       - postgres
       - cache
+volumes:
+  pg_data:
+  cache_data:

@@ -6,8 +6,9 @@ ENV PATH="$PNPM_HOME:$PATH"
 
 RUN corepack enable
 
-COPY . /app
 WORKDIR /app
+
+COPY package.json pnpm-lock.yaml ./
 
 # Prod deps
 FROM base AS prod-deps
@@ -16,6 +17,8 @@ RUN pnpm install --prod --frozen-lockfile
 
 # Build
 FROM base AS build
+
+COPY . .
 
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm prisma generate
@@ -28,7 +31,10 @@ COPY --from=prod-deps /app/node_modules /app/node_modules
 
 COPY --from=build /app/dist /app/dist
 COPY --from=build /app/prisma /app/prisma
+
+COPY --from=build /app/.env /app/.env
 COPY --from=build /app/package.json /app/package.json
+COPY --from=build /app/pnpm-lock.yaml /app/pnpm-lock.yaml
 
 EXPOSE 3333
 
