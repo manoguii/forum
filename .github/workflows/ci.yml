@@ -50,8 +50,10 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: imanogui/forum-api:${{ steps.generate_tag.outputs.sha }}, imanogui/forum-api:latest
-          build-args: |
+          tags: |
+            imanogui/forum-api:${{ steps.generate_tag.outputs.sha }}
+            imanogui/forum-api:latest
+          secrets: |
             PORT=${{ secrets.PORT }}
             REDIS_HOST=${{ secrets.REDIS_HOST }}
             DATABASE_URL=${{ secrets.DATABASE_URL }}

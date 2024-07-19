@@ -1,25 +1,24 @@
 # Base
 FROM node:20.15.1-alpine3.20 AS base
 
-ARG PORT
-ARG REDIS_HOST
-ARG DATABASE_URL
-ARG JWT_PRIVATE_KEY
-ARG JWT_PUBLIC_KEY
-ARG CLOUDFLARE_ACCOUNT_ID
-ARG AWS_BUCKET_NAME
-ARG AWS_ACCESS_KEY_ID
-ARG AWS_SECRET_ACCESS_KEY
-
-ENV PORT=${PORT} \
-    REDIS_HOST=${REDIS_HOST} \
-    DATABASE_URL=${DATABASE_URL} \
-    JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY} \
-    JWT_PUBLIC_KEY=${JWT_PUBLIC_KEY} \
-    CLOUDFLARE_ACCOUNT_ID=${CLOUDFLARE_ACCOUNT_ID} \
-    AWS_BUCKET_NAME=${AWS_BUCKET_NAME} \
-    AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
-    AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+RUN --mount=type=secret,id=port \
+  PORT=$(cat /run/secrets/port)
+RUN --mount=type=secret,id=redis_host \
+  REDIS_HOST=$(cat /run/secrets/redis_host)
+RUN --mount=type=secret,id=database_url \
+  DATABASE_URL=$(cat /run/secrets/database_url)
+RUN --mount=type=secret,id=jwt_private_key \
+  JWT_PRIVATE_KEY=$(cat /run/secrets/jwt_private_key)
+RUN --mount=type=secret,id=jwt_public_key \
+  JWT_PUBLIC_KEY=$(cat /run/secrets/jwt_public_key)
+RUN --mount=type=secret,id=cloudflare_account_id \
+  CLOUDFLARE_ACCOUNT_ID=$(cat /run/secrets/cloudflare_account_id)
+RUN --mount=type=secret,id=aws_bucket_name \
+  AWS_BUCKET_NAME=$(cat /run/secrets/aws_bucket_name)
+RUN --mount=type=secret,id=aws_access_key_id \
+  AWS_ACCESS_KEY_ID=$(cat /run/secrets/aws_access_key_id)
+RUN --mount=type=secret,id=aws_secret_access_key \
+  AWS_SECRET_ACCESS_KEY=$(cat /run/secrets/aws_secret_access_key)
 
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
