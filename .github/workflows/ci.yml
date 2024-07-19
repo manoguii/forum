@@ -46,19 +46,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build docker image
-        run: |
-          docker build \
-            -t imanogui/forum-api:${{ steps.generate_tag.outputs.sha }} . \
-            --build-arg PORT=${{ secrets.PORT }} \
-            --build-arg REDIS_HOST=${{ secrets.REDIS_HOST }} \
-            --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
-            --build-arg JWT_PRIVATE_KEY=${{ secrets.JWT_PRIVATE_KEY }} \
-            --build-arg JWT_PUBLIC_KEY=${{ secrets.JWT_PUBLIC_KEY }} \
-            --build-arg CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }} \
-            --build-arg AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} \
-            --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
-            --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - name: Push docker image
-        run: docker push imanogui/forum-api:${{ steps.generate_tag.outputs.sha }}
+      - name: Build and push action
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: imanogui/forum-api:${{ steps.generate_tag.outputs.sha }}, imanogui/forum-api:latest
+          build-args: |
+            PORT=${{ secrets.PORT }}
+            REDIS_HOST=${{ secrets.REDIS_HOST }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
+            JWT_PRIVATE_KEY=${{ secrets.JWT_PRIVATE_KEY }}
+            JWT_PUBLIC_KEY=${{ secrets.JWT_PUBLIC_KEY }}
+            CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+            AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}
+            AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+            AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
