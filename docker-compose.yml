@@ -14,11 +14,11 @@ services:
       - pg_data:/var/lib/postgresql/data
   cache:
     container_name: forum-cache
-    image: redis:7.2.5
+    image: bitnami/redis:7.0.15
     ports:
       - 6379:6379
     environment:
-      ALLOW_EMPTY_PASSWORD: yes
+      REDIS_PASSWORD: password123
     volumes:
       - cache_data:/data
   api:

@@ -21,6 +21,7 @@ const env = envSchema.parse(process.env)
 const prisma = new PrismaClient()
 const redis = new Redis({
   host: env.REDIS_HOST,
+  password: env.REDIS_PASSWORD,
   port: env.REDIS_PORT,
   db: env.REDIS_DB,
 })
