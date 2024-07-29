@@ -24,6 +24,9 @@ const redis = new Redis({
   password: env.REDIS_PASSWORD,
   port: env.REDIS_PORT,
   db: env.REDIS_DB,
+  tls: {
+    rejectUnauthorized: false,
+  },
 })
 
 function generateUniqueDatabaseURL(schemaId: string) {

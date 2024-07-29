@@ -10,6 +10,9 @@ export class RedisService extends Redis implements OnModuleDestroy {
       port: envService.get('REDIS_PORT'),
       db: envService.get('REDIS_DB'),
       password: envService.get('REDIS_PASSWORD'),
+      tls: {
+        rejectUnauthorized: false,
+      },
     })
   }
 
