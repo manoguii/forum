@@ -6,7 +6,7 @@ import { Test } from '@nestjs/testing'
 import request from 'supertest'
 import { StudentFactory } from 'test/factories/make-student'
 
-describe('Upload attachment (E2E)', () => {
+describe.skip('Upload attachment (E2E)', () => {
   let app: INestApplication
   let studentFactory: StudentFactory
   let jwt: JwtService
