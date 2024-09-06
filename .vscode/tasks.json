@@ -1,0 +1,26 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run project",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "PROJECT_DIR=$(dirname ${file}); cd \"${PROJECT_DIR}\"; pnpm test:debug"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    }
+  ]
+}
